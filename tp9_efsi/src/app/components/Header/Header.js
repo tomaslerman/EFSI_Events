@@ -1,26 +1,26 @@
 "use client";
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Header.module.css';
+import { useAuth } from '../../contexts/AuthContext'; // We'll create this context later
 
 export default function Header() {
-  // This is a placeholder for user authentication state
-  const isLoggedIn = false;
-  const username = "John Doe";
+  const { user, logout } = useAuth();
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        {/* Add your logo here */}
-        <Link href="/">Your Logo</Link>
+        <Image src="/logo.png" alt="Site Logo" width={50} height={50} />
       </div>
       <nav className={styles.nav}>
-        <Link href="/">Home</Link>
+        <Link href="/events">Home</Link>
         <Link href="/contact">Contact</Link>
       </nav>
-      {isLoggedIn && (
+      {user && (
         <div className={styles.userInfo}>
-          <span>{username}</span>
-          <button onClick={() => {/* Add logout logic */}}>Logout</button>
+          <Image src="/user-icon.png" alt="User Icon" width={24} height={24} />
+          <span>{user.name}</span>
+          <button onClick={logout}>Logout</button>
         </div>
       )}
     </header>

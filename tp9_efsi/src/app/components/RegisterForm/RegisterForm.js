@@ -1,11 +1,10 @@
-"use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from "./LoginForm.module.css";
+import styles from "./RegisterForm.module.css";
 import { useAuth } from '../../contexts/AuthContext';
-import Link from 'next/link';
 
-export default function LoginForm() {
+export default function RegisterForm() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
@@ -13,14 +12,21 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically validate the credentials with a backend
-    // For this example, we'll just simulate a successful login
-    login({ name: 'John Doe', email });
+    // Here you would typically send the registration data to a backend
+    // For this example, we'll just simulate a successful registration
+    login({ name, email });
     router.push('/events');
   };
 
   return (
-    <form className={styles.loginForm} onSubmit={handleSubmit}>
+    <form className={styles.registerForm} onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        placeholder="Full Name" 
+        required 
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
       <input 
         type="email" 
         placeholder="Email" 
@@ -35,8 +41,7 @@ export default function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit" className={styles.primary}>Log In</button>
-      <p>Don't have an account? <Link href="/register">Register here</Link></p>
+      <button type="submit" className={styles.primary}>Register</button>
     </form>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import LoginForm from "./components/LoginForm/LoginForm";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1>Login</h1>
         <LoginForm />
+       
       </main>
     </div>
   );
